@@ -72,6 +72,20 @@ class LabAutomator:
                 print("Found de-activated Noise button")
             self._noise_input = (noise_loc_x, noise_loc_y)
 
+            try:
+                self._signal2 = pag.center(pag.locateOnScreen('materials/s2_off.png'))
+            except Exception as e:
+                self._signal2 = pag.center(pag.locateOnScreen('materials/s2_on.png'))
+                print("Found activated 2nd Signal button")
+
+            s2_del_loc_x, s2_del_loc_y = pag.center(
+                pag.locateOnScreen('materials/s2_delay.png'))
+            self._s2_delay = (s2_del_loc_x, s2_del_loc_y)
+
+            s2_amp_loc_x, s2_amp_loc_y = pag.center(
+                pag.locateOnScreen('materials/s2_amplitude.png'))
+            self._s2_amp = (s2_amp_loc_x, s2_amp_loc_y)
+
         except Exception as e:
             raise Exception("Program is not present on the screen, or try removing values from the fields")
         
@@ -172,6 +186,40 @@ class LabAutomator:
     def set_noise(self, noise: float):
         self.__click(self._noise_input, 2)
         pag.write(str(noise))
+
+    def signal2_on(self):
+        try:
+            res = pag.center(pag.locateOnScreen('materials/s2_on.png'))
+        except Exception:
+            res=None
+
+        if res is None:
+            print("signal2 is off, clicking")
+            self.__click(self._signal2)
+            print("signal2 is on")
+        else:
+            print("signal2 is on")
+    
+    def signal2_off(self):
+        try:
+            res = pag.center(pag.locateOnScreen('materials/s2_off.png'))
+        except Exception:
+            res=None
+
+        if res is None:
+            print("signal2 is on, clicking")
+            self.__click(self._signal2)
+            print("signal2 is off")
+        else:
+            print("signal2 is off")
+
+    def set_signal2_delay(self, delay: float):
+        self.__click(self._s2_delay, 2)
+        pag.write(str(delay))
+    
+    def set_signal2_amplitude(self, amplitude: float):
+        self.__click(self._s2_amp, 2)
+        pag.write(str(amplitude))
 
     def save_screenshot(self, path: str):
         im = pag.screenshot(region=self.main_window)
