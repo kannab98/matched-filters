@@ -130,8 +130,8 @@ dmypy.json
 
 # LaTex
 
-.aux
-.log
-.fdb_latexmk
-.fls
-.synctex.gz
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
+*.synctex.gz
