@@ -23,11 +23,11 @@ listfiles = np.sort(listfiles)
 
 U = np.full((len(listfiles), 3), None)
 
-for j, file in enumerate(listfiles):
+for j, file in enumerate(listfiles[:len(listfiles)//2]):
     img = cv2.imread(file)
 
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    gray = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+    gray = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_NEAREST)
     img = cv2.merge([gray,gray,gray])
 
     img = img[:,0:img.shape[0]//2,:]
@@ -37,10 +37,11 @@ for j, file in enumerate(listfiles):
     # # Распознавание, допустимы только цифры
     digits = pytesseract.run_and_get_output(img, extension='txt', config=cfg).split()
 
-    if digits[0][0] == '0':
-        digits[0] = digits[0][0] + '.' + digits[0][1:]
+    # if digits[0][0] == '0':
+    #     digits[0] = digits[0][0] + '.' + digits[0][1:]
 
-    print(digits)
+
+    print(j, digits)
     for i, digit in enumerate(digits):
         U[j,i] = digits[i]
 
