@@ -2,94 +2,96 @@ import pyautogui as pag
 import time
 
 width, height = pag.size()
-
 # pag.PAUSE = 0.5
 lab_width, lab_height = 1182, 745
+
+path = 'materials1'
 
 
 class LabAutomator:
     def __init__(self):
         try:
-            self._build_btn = pag.center(pag.locateOnScreen('materials/build.png'))
+            pag.locateAllOnScreen('%s/build.png' % path)
+            self._build_btn = pag.center(pag.locateOnScreen('%s/build.png' % path))
             try:
-                self._clean_btn = pag.center(pag.locateOnScreen('materials/clean.png'))
+                self._clean_btn = pag.center(pag.locateOnScreen('%s/clean.png'% path))
             except Exception as e:
-                self._clean_btn = pag.center(pag.locateOnScreen('materials/clean2.png'))
+                self._clean_btn = pag.center(pag.locateOnScreen('%s/clean2.png'% path))
                 print("Found de-activated CLEAN button")
 
             dur_loc_x, dur_loc_y = pag.center(
-                pag.locateOnScreen('materials/duration.png'))
+                pag.locateOnScreen('%s/duration.png' % path))
             dur_loc_x += 50
             self._dur_input = (dur_loc_x, dur_loc_y)
 
             amp_loc_x, amp_loc_y = pag.center(
-                pag.locateOnScreen('materials/amplitude.png'))
+                pag.locateOnScreen('%s/amplitude.png' % path))
             amp_loc_x += 50
             self._amp_input = (amp_loc_x, amp_loc_y)
 
             try:
                 ff_loc_x, ff_loc_y = pag.center(
-                    pag.locateOnScreen('materials/fill_freq.png'))
+                    pag.locateOnScreen('%s/fill_freq.png' % path))
             except Exception as e:
-                ff_loc_x, ff_loc_y = pag.center(pag.locateOnScreen('materials/fill_freq2.png'))
+                ff_loc_x, ff_loc_y = pag.center(pag.locateOnScreen('%s/fill_freq2.png' % path))
                 print("Found de-activated freq button")
             ff_loc_x += 50
             self._freq_input = (ff_loc_x, ff_loc_y)
 
             try:
                 dev_loc_x, dev_loc_y = pag.center(
-                    pag.locateOnScreen('materials/deviation.png'))
+                    pag.locateOnScreen('%s/deviation.png' % path))
             except Exception as e:
                 dev_loc_x, dev_loc_y = pag.center(
-                    pag.locateOnScreen('materials/deviation2.png'))
+                    pag.locateOnScreen('%s/deviation2.png' % path))
                 print("Found de-activated deviation button")
             dev_loc_x += 50
             self._dev_input = (dev_loc_x, dev_loc_y)
 
-            self._barker = pag.center(pag.locateOnScreen('materials/barker.png'))
-            self._lfm = pag.center(pag.locateOnScreen('materials/lfm.png'))
-            self._radiopulse = pag.center(pag.locateOnScreen('materials/radiopulse.png'))
-            self._videopulse = pag.center(pag.locateOnScreen('materials/videopulse.png'))
+            self._barker = pag.center(pag.locateOnScreen('%s/barker.png' % path))
+            self._lfm = pag.center(pag.locateOnScreen('%s/lfm.png' % path))
+            self._radiopulse = pag.center(pag.locateOnScreen('%s/radiopulse.png' % path))
+            self._videopulse = pag.center(pag.locateOnScreen('%s/videopulse.png' % path))
             
             try:
-                self._filter = pag.center(pag.locateOnScreen('materials/fill_off.png'))
+                self._filter = pag.center(pag.locateOnScreen('%s/fill_off.png' % path))
             except Exception as e:
-                self._filter = pag.center(pag.locateOnScreen('materials/fill_on.png'))
+                self._filter = pag.center(pag.locateOnScreen('%s/fill_on.png' % path))
                 print("Found activated Filter button")
 
             try:
-                self._noise = pag.center(pag.locateOnScreen('materials/noise_off.png'))
+                self._noise = pag.center(pag.locateOnScreen('%s/noise_off.png' % path) )
             except Exception as e:
-                self._noise = pag.center(pag.locateOnScreen('materials/noise_on.png'))
+                self._noise = pag.center(pag.locateOnScreen('%s/noise_on.png' % path) )
                 print("Found activated Noise button")
 
             try:
                 noise_loc_x, noise_loc_y = pag.center(
-                    pag.locateOnScreen('materials/noise_input_on.png'))
+                    pag.locateOnScreen('%s/noise_input_on.png' % path))
             except Exception as e:
                 noise_loc_x, noise_loc_y = pag.center(
-                    pag.locateOnScreen('materials/noise_input_off.png'))
+                    pag.locateOnScreen('%s/noise_input_off.png'% path))
                 print("Found de-activated Noise button")
             self._noise_input = (noise_loc_x, noise_loc_y)
 
             try:
-                self._signal2 = pag.center(pag.locateOnScreen('materials/s2_off.png'))
+                self._signal2 = pag.center(pag.locateOnScreen('%s/s2_off.png'% path))
             except Exception as e:
-                self._signal2 = pag.center(pag.locateOnScreen('materials/s2_on.png'))
+                self._signal2 = pag.center(pag.locateOnScreen('%s/s2_on.png'% path))
                 print("Found activated 2nd Signal button")
 
             s2_del_loc_x, s2_del_loc_y = pag.center(
-                pag.locateOnScreen('materials/s2_delay.png'))
+                pag.locateOnScreen('%s/s2_delay.png'% path))
             self._s2_delay = (s2_del_loc_x, s2_del_loc_y)
 
             s2_amp_loc_x, s2_amp_loc_y = pag.center(
-                pag.locateOnScreen('materials/s2_amplitude.png'))
+                pag.locateOnScreen('%s/s2_amplitude.png'% path))
             self._s2_amp = (s2_amp_loc_x, s2_amp_loc_y)
 
         except Exception as e:
             raise Exception("Program is not present on the screen, or try removing values from the fields")
         
-        left, top, width, height = pag.locateOnScreen('materials/matlab_logo.png')
+        left, top, width, height = pag.locateOnScreen('%s/matlab_logo.png'% path)
         self.main_window = (left, top, lab_width, lab_height)
         # print(left, top, width, height)
 
@@ -133,7 +135,7 @@ class LabAutomator:
     
     def filter_on(self):
         try:
-            res = pag.center(pag.locateOnScreen('materials/fill_on.png'))
+            res = pag.center(pag.locateOnScreen('%s/fill_on.png'% path))
         except Exception:
             res=None
 
@@ -146,7 +148,7 @@ class LabAutomator:
     
     def filter_off(self):
         try:
-            res = pag.center(pag.locateOnScreen('materials/fill_off.png'))
+            res = pag.center(pag.locateOnScreen('%s/fill_off.png'% path))
         except Exception:
             res=None
 
@@ -159,7 +161,7 @@ class LabAutomator:
     
     def noise_on(self):
         try:
-            res = pag.center(pag.locateOnScreen('materials/noise_on.png'))
+            res = pag.center(pag.locateOnScreen('%s/noise_on.png'% path))
         except Exception:
             res=None
 
@@ -172,7 +174,7 @@ class LabAutomator:
     
     def noise_off(self):
         try:
-            res = pag.center(pag.locateOnScreen('materials/noise_off.png'))
+            res = pag.center(pag.locateOnScreen('%s/noise_off.png'% path))
         except Exception:
             res=None
 
@@ -189,7 +191,7 @@ class LabAutomator:
 
     def signal2_on(self):
         try:
-            res = pag.center(pag.locateOnScreen('materials/s2_on.png'))
+            res = pag.center(pag.locateOnScreen('%s/s2_on.png'% path))
         except Exception:
             res=None
 
@@ -202,7 +204,7 @@ class LabAutomator:
     
     def signal2_off(self):
         try:
-            res = pag.center(pag.locateOnScreen('materials/s2_off.png'))
+            res = pag.center(pag.locateOnScreen('%s/s2_off.png'% path))
         except Exception:
             res=None
 
@@ -225,6 +227,17 @@ class LabAutomator:
         im = pag.screenshot(region=self.main_window)
         im.save(path)
 
+    def save_output(self, path0: str):
+        left, top, width, height = pag.locateOnScreen('%s/output.png'% path)
+        data_window = (left-80, top, width+80, height)
+        im = pag.screenshot(region=data_window)
+        im.save(path0)
+
+
+
+
 if __name__ == "__main__":
     lab = LabAutomator()
     lab.noise_off()
+
+    # pag.center(pag.locateOnScreen('%s/build.png'))
