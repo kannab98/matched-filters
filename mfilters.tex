@@ -1,4 +1,4 @@
-\input{text/diss}
+\input{latex-preamble/preamble.tex}
 
 \begin{document}
 
@@ -6,7 +6,7 @@
 \def\labgroup{450}
 \def\labnumber{1}
 \def\labtheme{Согласованные фильтры}
-\input{text/titlepage}
+\input{latex-preamble/titlepage.tex}
 
 \newpage
 
@@ -21,7 +21,7 @@
 Тут практика
 
 \makeatletter
-\@for\i:={1,2,3,4,5,6}\do{\input{text/task\i.tex}}
+\@for\i:={1,2,3,4,6}\do{\input{text/task\i.tex}}
 \makeatother
 
 \section{Вывод}
