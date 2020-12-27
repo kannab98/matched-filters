@@ -1,8 +1,9 @@
 \input{preamble/preamble.tex}
+\usepackage{ wasysym }
 
 \begin{document}
 
-\def\labauthors{Понур К.А., Хавьер, Шиков А.П.}
+\def\labauthors{Виноградов И.Д., Понур К.А., Шиков А.П.}
 \def\labgroup{450}
 \def\labnumber{1}
 \def\labtheme{Согласованные фильтры}
@@ -11,6 +12,7 @@
 \newpage
 
 \tableofcontents
+\newpage
 
 \section{Теоретическая часть}
 \subsection{Прямоугольный импульс}%
@@ -100,16 +102,15 @@
      \label{eq:energy_spec}
      E_0 = \frac{(A \tau)^2}{2\pi}
      \int\limits_{-\infty}^{\infty} \qty(\sinc{\omega \frac{\tau}{2}})^2 \dd
-     \omega  = \frac{A^2 \tau^2}{\pi} \int\limits_{-\infty}^{\infty}
-     \qty(\sinc{\xi})^2 \dd \xi 
+     \omega  
 \end{equation}
 
 
 
-Интеграл в выражении \eqref{eq:energy_spec} равен $\pi$, а значит энергия на
-бесконечном интервале: 
- \begin{equation}
-     E_0 = A^2 \tau^2
+Посчитав интеграл в выражении \eqref{eq:energy_spec} 
+получим значение энергии на бесконечном интервале
+\begin{equation}
+     E_0 = A^2 \tau
 \end{equation}
 
 
