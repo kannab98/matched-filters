@@ -8,7 +8,7 @@ import numpy as np
 
 
 rootdir = "task4"
-regex = re.compile('.*out.png')
+regex = re.compile('t4s4f.*out.png')
 
 U = [[]]
 
@@ -23,7 +23,7 @@ listfiles = np.sort(listfiles)
 
 U = np.full((len(listfiles), 3), None)
 
-for j, file in enumerate(listfiles[:len(listfiles)//2]):
+for j, file in enumerate(listfiles):
     img = cv2.imread(file)
 
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
@@ -48,6 +48,7 @@ for j, file in enumerate(listfiles[:len(listfiles)//2]):
 U = np.array(U).T
 df = pd.DataFrame({'in': U[0], 'out': U[1], 'out_mean': U[2]})
 print(df)
-df.to_excel('task4.xlsx', index=False)
+
+df.to_excel('task4f.xlsx', index=False)
 
 

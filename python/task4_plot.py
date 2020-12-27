@@ -123,4 +123,5 @@ fig.savefig("../imgs/task4/t4f2.pdf")
 # ax.legend
 
 
+
 plt.show()
