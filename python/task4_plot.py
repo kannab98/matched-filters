@@ -104,16 +104,16 @@ fm = np.poly1d(fm)
 
 
 fig, ax = plt.subplots()
-l1 = ax.plot(T, U, 'r.', label='Неусредненное')
-l2 = ax.plot(T, Um, 'b.', label="Усредненное")
+# l1 = ax.plot(T, U, 'r.', label='Неусредненное')
+l2 = ax.plot(T, Um, 'r.', label="Усредненное")
 
-legend = plt.legend(handles=[l1[0], l2[0]], loc=2)
+legend = plt.legend(handles=[l2[0]], loc=2)
 plt.gca().add_artist(legend)
 
 
-l3 = ax.plot(T, f(T), 'r', label="$k=%.1f$" % k)
-l4 = ax.plot(T, fm(T), 'b', label="$k=%.1f$" % km)
-legend = plt.legend(handles=[l3[0], l4[0]], loc=4)
+# l3 = ax.plot(T, f(T), 'r', label="$k=%.1f$" % k)
+l4 = ax.plot(T, fm(T), 'b--', label="$k=%.1f$" % km)
+legend = plt.legend(handles=[ l4[0]], loc=4)
 plt.gca().add_artist(legend)
 fig.savefig("../imgs/task4/t4f2.pdf")
 # ax.legend()

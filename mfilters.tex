@@ -10,19 +10,185 @@
 
 \newpage
 
-{\bfseries Цель работы:} 
-Тут цель
+\tableofcontents
 
-\section{Теоритическая часть}
-Тут теория
+\section{Теоретическая часть}
+\subsection{Прямоугольный импульс}%
+\label{sub:theory_priamougol_nyi_impul_s}
+
+
+
+\newcommand{\sinc}[1]{\frac{\sin{#1}}{#1}}
+Представим видеоимпульс кусочной функцией:
+\begin{equation}
+    f(t) = 
+    \begin{cases}
+        A, &\text{ при } 0 \leq t \leq \tau \\
+        0, &\text{ при } t < 0 \text{ и } t > \tau
+    \end{cases}
+\end{equation}
+Получим аналитическое выражения для амплитудного, фазового и
+энергетического спектра прямоугольного видеоимпульса. 
+
+Запишем преобразование Фурье от сигнала $f(t)$ 
+\begin{equation}
+    F(j\omega) = \int\limits_{-\infty}^{\infty} f(t) e^{-j \omega t}  \dd t
+    = 
+    \frac{A}{-j \omega} e^{-j \omega t}\eval_{0}^{\tau} = 
+    A \tau \cdot \sinc{\omega \frac{\tau}{2}} e^{-j \omega \frac{\tau}{2}}
+\end{equation}
+
+
+
+Амплитудный спектр сигнала $f(t)$ будет модулем преобразования Фурье$\abs{F(j\omega)}$
+ \begin{equation}
+     S(\omega) = \abs{F(j\omega)} = A \tau \sinc{\omega\frac{\tau}{2}} 
+\end{equation}
+
+
+Фазовый спектр будет равен 
+\begin{equation}
+    \Psi(\omega) = \frac{\omega\tau}{2}
+\end{equation}
+
+Функция корреляции будет равна
+\begin{equation}
+    K(t) = \int\limits_{-\infty}^{\infty} f(t) f(t+t_{0}) \dd t_0 = 
+    \begin{cases}
+        A^2 \tau (1 - \frac{\abs{t}}{\tau}), &\text{ при } \abs{t} \leq \tau, \\
+        0, &\text{ при } \abs{t} > \tau
+    \end{cases}
+\end{equation}
+
+Спектральную плотность мощности тоже несложно найти как прямое преобразование
+Фурье от функции корреляции $K(t)$:
+\begin{equation}
+    \begin{gathered}
+        E(\omega) = \int\limits_{-\infty}^{\infty} K(t) e^{-j\omega t} \dd t =
+        2 A^2 \tau \int\limits_{0}^{\tau}  \qty(1- \frac{t}{\tau} )e^{-j \omega t}\dd t
+    \end{gathered}
+\end{equation}
+
+\begin{equation}
+    \begin{gathered}
+        - \frac{1}{\tau}\int\limits_{0}^{\tau}  t e^{-j \omega t}\dd t = 
+        \frac{e^{- j \omega \tau} \qty( - j \omega \tau - 1) + 1}{\tau\omega^2}
+        \\
+        \int\limits_{0}^{\tau}  e^{-j \omega t}\dd t = 
+        \frac{1}{-j \omega} \qty(e^{-j\omega\tau} - 1)
+    \end{gathered}
+\end{equation}
+
+
+
+
+
+\begin{equation}
+    \label{eq:pdf}
+    E(\omega) = \qty(A\tau \sinc{\omega \frac{\tau}{2}})^2
+\end{equation}
+
+Можем оценить расстояние между нулями главного лепестка энергетического спектра:
+\begin{equation}
+    \label{eq:DeltaW}
+    \Delta \omega = \frac{4 \pi}{\tau}
+\end{equation}
+
+
+Также можно оценить энергию сигнала на бесконечном интервале:
+ \begin{equation}
+     \label{eq:energy_spec}
+     E_0 = \frac{(A \tau)^2}{2\pi}
+     \int\limits_{-\infty}^{\infty} \qty(\sinc{\omega \frac{\tau}{2}})^2 \dd
+     \omega  = \frac{A^2 \tau^2}{\pi} \int\limits_{-\infty}^{\infty}
+     \qty(\sinc{\xi})^2 \dd \xi 
+\end{equation}
+
+
+
+Интеграл в выражении \eqref{eq:energy_spec} равен $\pi$, а значит энергия на
+бесконечном интервале: 
+ \begin{equation}
+     E_0 = A^2 \tau^2
+\end{equation}
+
+
+\subsection{Прямоугольный импульс с гармоническим заполнением}%
+\label{sub:priamougol_nyi_impul_s_s_garmonicheskim_zapolneniem}
+
+
+Представим радиоимпульс кусочной функцией ($\omega_0 \gg \frac{2\pi}{\tau}$):
+\begin{equation}
+    f(t) = 
+    \begin{cases}
+        A\cos (\omega_0 t + \phi_0), &\text{ при } 0 \leq t \leq \tau \\
+        0, &\text{ при } t < 0 \text{ и } t > \tau
+    \end{cases}
+\end{equation}
+Получим аналитическое выражения для амплитудного, фазового и
+энергетического спектра прямоугольного радиоимпульса. 
+
+Запишем преобразование Фурье от сигнала $f(t)$ 
+\begin{equation}
+    \begin{gathered}
+    F(j\omega) = \int\limits_{-\infty}^{\infty} f(t) e^{-j \omega t}  \dd t =
+    \begin{cases}
+    \frac{A\tau}{2}  \sinc{ \frac{\omega + \omega_0}{2} \tau} 
+    \exp{j \frac{\omega- \omega_0}{2} \tau + j \phi_0} , &\text{ }\omega \geq 0 \\
+    \frac{A\tau}{2}  \sinc{ \frac{\omega - \omega_0}{2} \tau} 
+    \exp{j \frac{\omega + \omega_0}{2} \tau + j \phi_0} , &\text{  } \omega < 0
+    \end{cases}  
+    \end{gathered}
+\end{equation}
+
+
+
+
+Амплитудный спектр сигнала $f(t)$ будет модулем преобразования Фурье 
+и будет вычисляться аналогично случаю прямоугольного импульса
+ \begin{equation}
+     S(\omega) = \abs{F(j\omega)} 
+ \end{equation}
+
+Фазовый спектр по определению будет равен 
+\begin{equation}
+    \Psi(\omega) = \arctg{ \frac {\Im{F(j \omega)}}{\Re{F(j\omega)}}}
+\end{equation}
+
+Функция корреляции будет равна
+\begin{equation}
+    K(t) = \int\limits_{-\infty}^{\infty} f(t) f(t+t_{0}) \dd t_0 = 
+    \begin{cases}
+        A^2 \tau (1 - \frac{\abs{t}}{\tau})\cos \omega_0 t, &\text{ при } \abs{t} \leq \tau, \\
+        0, &\text{ при } \abs{t} > \tau
+    \end{cases}
+\end{equation}
+
+Спектральную плотность мощности тоже несложно найти как прямое преобразование
+Фурье от функции корреляции $K(t)$:
+\begin{equation}
+    \begin{gathered}
+        E(\omega) = \int\limits_{-\infty}^{\infty} K(t) e^{-j\omega t} \dd t =
+        S^2(\omega) + S^2(- \omega)
+    \end{gathered}
+\end{equation}
+
+
+При этом энергетика радиоимпульса равно энергетике видеоимпульса
+\begin{equation}
+    \label{eq:}
+    E_0 = A^2 \tau^2
+\end{equation}
+
 
 \newpage
 \section{Практическая часть}
 Тут практика
 
 \makeatletter
-\@for\i:={1,2,3,4,5,6}\do{\input{text/task\i.tex}}
+\@for\i:={1,2,3,4,5,6}\do{\input{text/task\i} \newpage}
 \makeatother
+
 
 \section{Вывод}
 
